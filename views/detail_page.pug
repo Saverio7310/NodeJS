@@ -1,0 +1,37 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Dettaglio utente
+        link(rel="stylesheet", href="/css/header.css")
+        link(rel="stylesheet", href="/css/styles.css")
+        link(rel="stylesheet", href="/css/detail.css")
+
+    body
+        header.main-header
+            nav.main-header__nav
+                ul.main-header__item-list
+                    li.main-header__item
+                        form(action="/", method="get")
+                            button(type="submit") Pagina principale
+
+        main
+            if prods.length > 0 && prods[0] !== null
+                .grid
+                    each user in prods
+                        article.card
+                            header.card__header
+                                h1.user__title #{user.name} #{user.surname}
+                            .card__image
+                                img(src="/imgs/user.png", alt="")
+                            .card__actions
+                                a.btn(href="/admin/edit-user/<%= user._id %>?edit=true") Edit
+                                input(type="hidden" value=user._id name="userId")
+                                input(type="hidden" value=csrfToken name="_csrf")
+                                button.btn(type="button" onclick="deleteUser(this)") Delete
+            else
+                h1 No Users Found!
+
+        script(src="/js/asynch.js") 

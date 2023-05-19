@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inserisci un utente</title>
+</head>
+<body>
+    <main>
+        <label for="add">Inserisci utente</label>
+        <form action="/addUser", method="POST", id="add">
+            <label for="nome">Inserisci il nome</label>
+            <input type="text", name="nome_add", id="nome">
+            <label for="cognome">Inserisci il cognome</label>
+            <input type="text", name="cognome_add", id="cognome">
+            <button type="submit">Invio dati</button>
+        </form>
+
+        <br>
+        <br>
+        <br>
+
+        <label for="search">Cerca utente</label>
+        <form action="/searchUser", method="POST", id="search">
+            <label for="nome">Inserisci il nome</label>
+            <input type="text", name="nome_search", id="nome">
+            <label for="cognome">Inserisci il cognome</label>
+            <input type="text", name="cognome_search", id="cognome">
+            <button type="submit">Cerca</button>
+        </form>
+        <br>
+        <br>
+        <br>
+        <form action="/auth" method="GET">
+            <button type="submit">Registrati</button>
+        </form>
+        <form action="/login" method="GET">
+            <button type="submit">Log In</button>
+        </form>
+        <form action="/logout" method="POST">
+            <input type="hidden" name="_csrf" value=csrfToken">
+            <button type="submit">Log Out</button>
+        </form>
+    </main>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inserisci un utente</title>
+</head>
+<body>
+    <main>
+        <label for="add">Inserisci utente</label>
+        <form action="/addUser", method="POST", id="add">
+            <label for="nome">Inserisci il nome</label>
+            <input type="text", name="nome_add", id="nome">
+            <label for="cognome">Inserisci il cognome</label>
+            <input type="text", name="cognome_add", id="cognome">
+            <input type="hidden" name="_csrf" value=csrfToken>
+            <button type="submit">Invio dati</button>
+        </form>
+
+        <br>
+        <br>
+        <br>
+
+        <label for="search">Cerca utente</label>
+        <form action="/searchUser", method="POST", id="search">
+            <label for="nome">Inserisci il nome</label>
+            <input type="text", name="nome_search", id="nome">
+            <label for="cognome">Inserisci il cognome</label>
+            <input type="text", name="cognome_search", id="cognome">
+            <input type="hidden" name="_csrf" value=csrfToken}">
+            <button type="submit">Cerca</button>
+        </form>
+        <br>
+        <br>
+        <br>
+        <form action="/auth" method="GET">
+            <button type="submit">Registrati</button>
+        </form>
+        <form action="/login" method="GET">
+            <button type="submit">Log In</button>
+        </form>
+        <form action="/logout" method="POST">
+            <input type="hidden" name="_csrf" value=csrfToken>
+            <button type="submit">Log Out</button>
+        </form>
+    </main>
+</body>
+</html>

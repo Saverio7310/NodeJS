@@ -1,0 +1,52 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{title}
+        link(rel="stylesheet", href="/css/header.css")
+        link(rel="stylesheet", href="/css/styles.css")
+
+    body
+        header.main-header
+            nav.main-header__nav
+                ul.main-header__item-list
+                    li.main-header__item
+                        form(action="/", method="get")
+                            button(type="submit") Pagina principale
+
+        main.main 
+            if mode === 'login'
+                form(action="/login", method="POST") 
+                    .center
+                        .col-1.row
+                            label(for="email") Email  
+                            input(type="text", name="email", id="email")
+                        .col-2.row
+                            label(for="pass") Password 
+                            input(type="password" required, name="password", id="pass")
+                            input(type="hidden" name="_csrf" value=csrfToken)
+                        .col-3.row_but
+                            button(type="submit") Accedi
+                        if error
+                            .col-4.row--error
+                                label.user-message.user-message--error #{error}
+            else
+                form(action="/signup", method="POST")
+                    .center
+                        .col-1.row
+                            label(for="email") Email
+                            input(type="text", name="email", id="email")
+                        .col-2.row
+                            label(for="pass") Password    
+                            input(type="password" required, name="password", id="pass")
+                        .col-3.row
+                            label(for="pass2") Conferma password
+                            input(type="password" required, name="confirmed_password", id="pass2")
+                            input(type="hidden" name="_csrf" value=csrfToken)
+                        .col-4.row_but
+                            button(type="submit") Registrati
+                        if error
+                            .col-5.row--error
+                                label.user-message.user-message--error #{error}

@@ -1,0 +1,55 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Inserisci un utente
+        link(rel="stylesheet", href="/css/header.css")
+        link(rel="stylesheet", href="/css/styles.css")
+    body
+        header.main-header
+            nav.main-header__nav
+                ul.main-header__item-list
+                    li.main-header__item
+                        form(action="/", method="get")
+                            button(type="submit") Pagina Principale
+                    if isLoggedIn !== true
+                        li.main-header__item
+                            form(action="/auth", method="get")
+                                button(type="submit") Registrati
+                        li.main-header__item
+                            form(action="/login", method="get")
+                                button(type="submit") Log In
+                    else
+                        li.main-header__item
+                            form(action="/logout", method="post")
+                                input(type="hidden", name="_csrf", value=csrfToken)
+                                button(type="submit") Log Out
+                        
+        main.main
+            .center    
+                label(for="div_add") Inserisci utente
+                div(id="div_add")
+                    form(action="/addUser", method="post", id="add")
+                        .col-1.row
+                            label(for="nome") Inserisci il nome
+                            input(type="text" required, name="nome_add", id="nome")
+                        .col-2.row
+                            label(for="cognome") Inserisci il cognome
+                            input(type="text" required, name="cognome_add", id="cognome")
+                        .col-3.row_but
+                            input(type="hidden", name="_csrf", value=csrfToken)
+                            button(type="submit") Conferma
+                label(for="div_search") Cerca utente 
+                div(id="div_search")
+                    form(action="/searchUser", method="post", id="search")
+                        .col-1.row    
+                            label(for="nome") Inserisci il nome
+                            input(type="text" required, name="nome_search", id="nome")
+                        .col-2.row    
+                            label(for="cognome") Inserisci il cognome
+                            input(type="text" required, name="cognome_search", id="cognome")
+                        .col-3.row_but    
+                            input(type="hidden", name="_csrf", value=csrfToken)
+                            button Cerca

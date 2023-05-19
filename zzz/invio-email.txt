@@ -1,0 +1,19 @@
+/* 
+Per inviare una mail:
+const nodemailer = require('nodemailer')
+const sendgridTransport = require('nodemailer-sendgrid-transport')
+
+//configurazione transporter per la gestione delle mail
+const transporter = nodemailer.createTransport(sendgridTransport({
+    auth: {
+        api_key: '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'
+    }
+}))
+
+transporter.sendMail({
+    to: mail destinatario,
+    from: mail mittente,
+    subject: oggetto,
+    html: codice della mail
+})
+ */
