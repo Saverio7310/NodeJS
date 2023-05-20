@@ -4,6 +4,12 @@ const path = require('path')
 const session = require('express-session')
 const csrf = require('csurf')
 const flash = require('connect-flash')
+const dotenv = require('dotenv')
+
+//serve a caricare il contentuto del file .env all'interno di process.env
+//in questo modo si nascondono element sensibili
+dotenv.config()
+//console.log(process.env)
 
 //con questa scrittura si intende che si importa una funzione passandogli come
 //argomento la sessione session. Da qui si ottiene il costruttore???
@@ -12,13 +18,14 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 const mongoConnection = require('./util/mongo').mongoConnection
 const main_router = require('./routes/main_page')
 const auth_router = require('./routes/auth')
+const api_router = require('./routes/api_first')
 
 //creazione il server
 const server = express()
 
 //database per salvare le sessioni
 const store = new MongoDBStore({
-    uri: 'mongodb+srv://saverioperrone:4OHIJVRDoyzJaLfp@cluster0.wwbkxel.mongodb.net/prova?retryWrites=true&w=majority',
+    uri: process.env.URI_MONGODB,
     collection: 'sessions'
 })
 
@@ -28,7 +35,7 @@ const csrfProtection = csrf()
 //settaggio del modulo da usare per generare gli html
 server.set('view conroller', 'pug')
 
-//middleware che consente di prendere i dati dal body della request
+//middleware che consente di prendere i dati dal body della request quando arrivano da un form
 server.use(parser.urlencoded({ extended: false }))
 
 //accesso ai file pubblici. qui css
@@ -61,6 +68,12 @@ server.use(main_router)
 //middleware per le pagine di autenticazione
 server.use(auth_router)
 
+//middleware che consent edi prendere i dati dal body quando arrivano da un chiamata api => JSON
+server.use(parser.json())
+
+//middleware per gestire le chiamate API
+server.use('/api', api_router)
+
 //middleware pagina di errore
 server.use((req, res, next) => {
     res.render('errors/404.pug', { code: 404 })
@@ -74,5 +87,5 @@ server.use((error, req, res, next) => {
 
 //connessione a MongoDB e listen del server
 mongoConnection(() => {
-    server.listen(3000)
+    server.listen(8080)
 })
