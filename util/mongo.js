@@ -5,15 +5,16 @@ let _db
 
 const mongoConnection = (cb) => {
     client
-        .connect('mongodb+srv://saverioperrone:4OHIJVRDoyzJaLfp@cluster0.wwbkxel.mongodb.net/?retryWrites=true&w=majority')
+        .connect(process.env.URI_MONGODB)
         .then(client => {
             //ritorna il client
             console.log('Connesso')
-            _db = client.db('prova')
+            _db = client.db()
             cb()
         })
         .catch(err => {
             console.log('Errore connessione MongoDB')
+            throw 'Errore connessione MongoDB'
         })
 }
 
